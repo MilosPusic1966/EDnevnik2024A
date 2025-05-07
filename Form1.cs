@@ -84,5 +84,13 @@ namespace EDnevnik2024A
             broj_reda = podaci.Rows.Count - 1;
             popuni_txt();
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            // INSERT
+            string naredba = "INSERT INTO osoba (ime,prezime,adresa,jmbg,email,pass,uloga)";
+            naredba = naredba + "VALUES ("+textBox2.Text+",";
+            //INSERT INTO osoba VALUES ('Nikola','Maricic','adresa')
+        }
     }
 }
