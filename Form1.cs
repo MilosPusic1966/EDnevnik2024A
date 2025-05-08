@@ -94,10 +94,20 @@ namespace EDnevnik2024A
             naredba = naredba + textBox4.Text + "','";
             naredba = naredba + textBox5.Text + "','";
             naredba = naredba + textBox6.Text + "','";
-            naredba = naredba + textBox7.Text + "','";
-            naredba = naredba + textBox.Text + "'";
-
+            naredba = naredba + textBox7.Text + "',";
+            naredba = naredba + textBox8.Text + ")";
+            string CS = "Data source=DESKTOP-6LPEK0P\\SQLEXPRESS;Initial catalog=ednevnik;Integrated security=true";
+            SqlConnection veza = new SqlConnection(CS);
+            SqlCommand komanda = new SqlCommand(naredba, veza);
+            veza.Open();
+            komanda.ExecuteNonQuery();
+            veza.Close();
             //INSERT INTO osoba VALUES ('Nikola','Maricic','adresa')
+            
+            SqlDataAdapter adapter = new SqlDataAdapter("SELECT * FROM osoba", veza);
+            podaci = new DataTable();
+            adapter.Fill(podaci);
+            popuni_txt();
         }
     }
 }
