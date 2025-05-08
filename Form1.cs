@@ -124,8 +124,28 @@ namespace EDnevnik2024A
             SqlDataAdapter adapter = new SqlDataAdapter("SELECT * FROM osoba", veza);
             podaci = new DataTable();
             adapter.Fill(podaci);
-            if (broj_reda < podaci.Rows.Count - 1) broj_reda++;
-            else broj_reda--;
+            if (broj_reda >= podaci.Rows.Count - 1) broj_reda--;
+            popuni_txt();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            // UPDATE
+            string naredba = "UPDATE osoba SET ime='" + textBox2.Text+"',";
+            naredba = naredba + "prezime='" + textBox3.Text + "',";
+            naredba = naredba + "adresa='" + textBox4.Text + "'";
+            naredba = naredba + " WHERE id=" + textBox1.Text;
+            string CS = "Data source=DESKTOP-6LPEK0P\\SQLEXPRESS;Initial catalog=ednevnik;Integrated security=true";
+            SqlConnection veza = new SqlConnection(CS);
+            SqlCommand komanda = new SqlCommand(naredba, veza);
+            veza.Open();
+            komanda.ExecuteNonQuery();
+            veza.Close();
+            //INSERT INTO osoba VALUES ('Nikola','Maricic','adresa')
+
+            SqlDataAdapter adapter = new SqlDataAdapter("SELECT * FROM osoba", veza);
+            podaci = new DataTable();
+            adapter.Fill(podaci);
             popuni_txt();
         }
     }
