@@ -45,10 +45,10 @@ namespace EDnevnik2024A
             textBox2.Text = podaci.Rows[broj_reda][1].ToString();
             textBox3.Text = podaci.Rows[broj_reda][2].ToString();
             textBox4.Text = podaci.Rows[broj_reda][3].ToString();
-            textBox5.Text = podaci.Rows[broj_reda][3].ToString();
-            textBox6.Text = podaci.Rows[broj_reda][3].ToString();
-            textBox7.Text = podaci.Rows[broj_reda][3].ToString();
-            textBox8.Text = podaci.Rows[broj_reda][3].ToString();
+            textBox5.Text = podaci.Rows[broj_reda][4].ToString();
+            textBox6.Text = podaci.Rows[broj_reda][5].ToString();
+            textBox7.Text = podaci.Rows[broj_reda][6].ToString();
+            textBox8.Text = podaci.Rows[broj_reda][7].ToString();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -107,6 +107,25 @@ namespace EDnevnik2024A
             SqlDataAdapter adapter = new SqlDataAdapter("SELECT * FROM osoba", veza);
             podaci = new DataTable();
             adapter.Fill(podaci);
+            popuni_txt();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            // DELETE
+            string naredba = "DELETE FROM osoba WHERE id=" + textBox1.Text;
+            string CS = "Data source=DESKTOP-6LPEK0P\\SQLEXPRESS;Initial catalog=ednevnik;Integrated security=true";
+            SqlConnection veza = new SqlConnection(CS);
+            SqlCommand komanda = new SqlCommand(naredba, veza);
+            veza.Open();
+            komanda.ExecuteNonQuery();
+            veza.Close();
+           
+            SqlDataAdapter adapter = new SqlDataAdapter("SELECT * FROM osoba", veza);
+            podaci = new DataTable();
+            adapter.Fill(podaci);
+            if (broj_reda < podaci.Rows.Count - 1) broj_reda++;
+            else broj_reda--;
             popuni_txt();
         }
     }
