@@ -89,7 +89,14 @@ namespace EDnevnik2024A
         {
             // INSERT
             string naredba = "INSERT INTO osoba (ime,prezime,adresa,jmbg,email,pass,uloga)";
-            naredba = naredba + "VALUES ("+textBox2.Text+",";
+            naredba = naredba + "VALUES ('" + textBox2.Text + "','";
+            naredba = naredba + textBox3.Text + "','";
+            naredba = naredba + textBox4.Text + "','";
+            naredba = naredba + textBox5.Text + "','";
+            naredba = naredba + textBox6.Text + "','";
+            naredba = naredba + textBox7.Text + "','";
+            naredba = naredba + textBox.Text + "'";
+
             //INSERT INTO osoba VALUES ('Nikola','Maricic','adresa')
         }
     }
