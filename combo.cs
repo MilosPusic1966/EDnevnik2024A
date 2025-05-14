@@ -29,6 +29,17 @@ namespace EDnevnik2024A
             comboBox1.ValueMember = "id";
             comboBox1.DisplayMember = "naziv";
             comboBox1.SelectedIndex = -1;
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Indeks:" + comboBox1.SelectedIndex+" Value:"+comboBox1.SelectedValue);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            comboBox1.SelectedValue = 11;
         }
     }
 }
