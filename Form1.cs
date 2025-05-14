@@ -138,7 +138,7 @@ namespace EDnevnik2024A
             veza.Close();
             uzmi_podatke();
             MessageBox.Show("Update uradjen");
-            //popuni_txt();
+            popuni_txt();
         }
     }
 }

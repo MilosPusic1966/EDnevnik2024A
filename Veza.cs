@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
+using System.Configuration;
 
 namespace EDnevnik2024A
 {
@@ -11,7 +12,8 @@ namespace EDnevnik2024A
     {
         public static SqlConnection konekcija()
         {
-            string CS = "Data source=DESKTOP-6LPEK0P\\SQLEXPRESS;Initial catalog=ednevnik;Integrated security=true";
+
+            string CS = ConfigurationManager.ConnectionStrings["skola"].ConnectionString;
             return new SqlConnection(CS);
         }
     }
