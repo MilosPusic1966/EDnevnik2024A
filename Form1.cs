@@ -19,6 +19,13 @@ namespace EDnevnik2024A
         {
             InitializeComponent();
         }
+        void uzmi_podatke()
+        {
+            SqlConnection veza = Veza.konekcija();
+            SqlDataAdapter adapter = new SqlDataAdapter("SELECT * FROM osoba", veza);
+            podaci = new DataTable();
+            adapter.Fill(podaci);
+        }
         void popuni_txt()
         {
             if (broj_reda == podaci.Rows.Count - 1)
@@ -54,11 +61,7 @@ namespace EDnevnik2024A
         private void Form1_Load(object sender, EventArgs e)
         {
             broj_reda = 0;
-            string CS = "Data source=DESKTOP-6LPEK0P\\SQLEXPRESS;Initial catalog=ednevnik;Integrated security=true";
-            SqlConnection veza = new SqlConnection(CS);
-            SqlDataAdapter adapter = new SqlDataAdapter("SELECT * FROM osoba", veza);
-            podaci = new DataTable();
-            adapter.Fill(podaci);
+            uzmi_podatke();
             popuni_txt();
         }
 
@@ -96,17 +99,13 @@ namespace EDnevnik2024A
             naredba = naredba + textBox6.Text + "','";
             naredba = naredba + textBox7.Text + "',";
             naredba = naredba + textBox8.Text + ")";
-            string CS = "Data source=DESKTOP-6LPEK0P\\SQLEXPRESS;Initial catalog=ednevnik;Integrated security=true";
-            SqlConnection veza = new SqlConnection(CS);
+            SqlConnection veza = Veza.konekcija();
             SqlCommand komanda = new SqlCommand(naredba, veza);
             veza.Open();
             komanda.ExecuteNonQuery();
             veza.Close();
             //INSERT INTO osoba VALUES ('Nikola','Maricic','adresa')
-            
-            SqlDataAdapter adapter = new SqlDataAdapter("SELECT * FROM osoba", veza);
-            podaci = new DataTable();
-            adapter.Fill(podaci);
+            uzmi_podatke();
             popuni_txt();
         }
 
@@ -114,16 +113,12 @@ namespace EDnevnik2024A
         {
             // DELETE
             string naredba = "DELETE FROM osoba WHERE id=" + textBox1.Text;
-            string CS = "Data source=DESKTOP-6LPEK0P\\SQLEXPRESS;Initial catalog=ednevnik;Integrated security=true";
-            SqlConnection veza = new SqlConnection(CS);
+            SqlConnection veza = Veza.konekcija();
             SqlCommand komanda = new SqlCommand(naredba, veza);
             veza.Open();
             komanda.ExecuteNonQuery();
             veza.Close();
-           
-            SqlDataAdapter adapter = new SqlDataAdapter("SELECT * FROM osoba", veza);
-            podaci = new DataTable();
-            adapter.Fill(podaci);
+            uzmi_podatke();
             if (broj_reda >= podaci.Rows.Count - 1) broj_reda--;
             popuni_txt();
         }
@@ -135,18 +130,15 @@ namespace EDnevnik2024A
             naredba = naredba + "prezime='" + textBox3.Text + "',";
             naredba = naredba + "adresa='" + textBox4.Text + "'";
             naredba = naredba + " WHERE id=" + textBox1.Text;
-            string CS = "Data source=DESKTOP-6LPEK0P\\SQLEXPRESS;Initial catalog=ednevnik;Integrated security=true";
-            SqlConnection veza = new SqlConnection(CS);
+            
+            SqlConnection veza = Veza.konekcija();
             SqlCommand komanda = new SqlCommand(naredba, veza);
             veza.Open();
             komanda.ExecuteNonQuery();
             veza.Close();
-            //INSERT INTO osoba VALUES ('Nikola','Maricic','adresa')
-
-            SqlDataAdapter adapter = new SqlDataAdapter("SELECT * FROM osoba", veza);
-            podaci = new DataTable();
-            adapter.Fill(podaci);
-            popuni_txt();
+            uzmi_podatke();
+            MessageBox.Show("Update uradjen");
+            //popuni_txt();
         }
     }
 }
