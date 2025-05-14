@@ -12,7 +12,6 @@ namespace EDnevnik2024A
     {
         public static SqlConnection konekcija()
         {
-
             string CS = ConfigurationManager.ConnectionStrings["skola"].ConnectionString;
             return new SqlConnection(CS);
         }
