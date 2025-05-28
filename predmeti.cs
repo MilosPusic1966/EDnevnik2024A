@@ -15,15 +15,17 @@ namespace EDnevnik2024A
     {
         DataTable podaci;
         SqlDataAdapter adapter;
-        public predmeti()
+        string ime_tabele;
+        public predmeti(string tabela)
         {
+            ime_tabele = tabela;
             InitializeComponent();
         }
 
         private void predmeti_Load(object sender, EventArgs e)
         {
             podaci = new DataTable();
-            adapter = new SqlDataAdapter("SELECT * FROM predmet",Veza.konekcija() );
+            adapter = new SqlDataAdapter("SELECT * FROM "+ime_tabele,Veza.konekcija() );
             adapter.Fill(podaci);
             dataGridView1.DataSource = podaci;
             dataGridView1.Columns["id"].ReadOnly= true;
@@ -34,7 +36,7 @@ namespace EDnevnik2024A
         {
             DataTable menjano = podaci.GetChanges();
             adapter.UpdateCommand = new SqlCommandBuilder(adapter).GetUpdateCommand();
-            adapter.Update(podaci);
+            adapter.Update(menjano);
         }
     }
 }

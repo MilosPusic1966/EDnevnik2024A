@@ -37,8 +37,20 @@ namespace EDnevnik2024A
 
         private void predmetiToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            predmeti cetvrta = new predmeti();
+            predmeti cetvrta = new predmeti("predmet");
             cetvrta.ShowDialog();
+        }
+
+        private void smeroviToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            predmeti nova = new predmeti("smer");
+            nova.ShowDialog();
+        }
+
+        private void godineToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            predmeti vuk = new predmeti("Skolska_godina");
+            vuk.ShowDialog();
         }
     }
 }
