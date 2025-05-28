@@ -34,5 +34,11 @@ namespace EDnevnik2024A
             sifarnik treca = new sifarnik();
             treca.ShowDialog();
         }
+
+        private void predmetiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            predmeti cetvrta = new predmeti();
+            cetvrta.ShowDialog();
+        }
     }
 }
